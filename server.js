@@ -40,13 +40,25 @@ server.listen(port, () => {
 });
 
 io.on("connection", (socket) => {
+  let roomId;
+  socket.on("join-room", (roomIdd) => {
+    console.log(`User joined room: ${roomIdd}`);
+    roomId = roomIdd;
+    socket.join(roomId);
+  });
+
   socket.on("offer", (data) => {
-    socket.broadcast.emit("offer", data);
+    socket.to(roomId).emit("offer", data);
   });
+
   socket.on("answer", (data) => {
-    socket.broadcast.emit("answer", data);
+    console.log("Answer received:");
+    socket.to(roomId).emit("answer", data);
   });
+
   socket.on("new-ice-candidate", (candidate) => {
-    socket.broadcast.emit("new-ice-candidate", candidate);
+    console.log("New ICE candidate received:");
+    socket.to(roomId).emit("new-ice-candidate", candidate);
   });
+
 });

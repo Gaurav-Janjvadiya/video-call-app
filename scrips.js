@@ -1,10 +1,30 @@
 const localVideo = document.querySelector("#local-video");
 const remoteVideo = document.querySelector("#remote-video");
-const callBtn = document.querySelector("button");
+const callBtn = document.querySelector("#call-btn");
+const muteBtn = document.querySelector("#mute-btn");
+const joinBtn = document.querySelector("#join-btn");
 const socket = io({ cors: { origin: "*" } });
+
+document.querySelector("#random-id").value = Math.random()
+  .toString(36)
+  .substring(2, 15);
 
 let localStream;
 let peerConnection;
+let roomId;
+
+muteBtn.addEventListener("click", () => {
+  remoteVideo.muted = !remoteVideo.muted;
+  muteBtn.textContent = remoteVideo.muted ? "Unmute" : "Mute";
+});
+
+joinBtn.addEventListener("click", () => {
+  roomId = document.querySelector("#room-id").value;
+  socket.emit("join-room", roomId);
+  console.log(`Joined room: ${roomId}`);
+  callBtn.disabled = false;
+  muteBtn.disabled = false;
+});
 
 const call = async (e) => {
   localStream = await navigator.mediaDevices.getUserMedia({
@@ -35,8 +55,10 @@ const connect = async () => {
     if (offer) {
       peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
     }
+    console.log("Received offer:", offer);
     const answer = await peerConnection.createAnswer();
     await peerConnection.setLocalDescription(answer);
+    console.log("Sending answer:", answer);
     socket.emit("answer", answer);
   });
 

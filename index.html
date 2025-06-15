@@ -11,7 +11,13 @@
       <video autoplay playsinline id="local-video" muted></video>
       <video autoplay playsinline id="remote-video"></video>
     </div>
-    <button>Call</button>
+    <div class="videos">
+      <button id="call-btn" disabled>Call</button>
+      <button id="mute-btn" disabled>Mute</button>
+      <button id="join-btn">Join Room</button>
+      <input type="text" id="room-id" placeholder="Enter Room ID" />
+      <input type="text" id="random-id" placeholder="Enter Room ID" />
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./scrips.js"></script>
   </body>
