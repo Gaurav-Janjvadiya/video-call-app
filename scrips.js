@@ -68,7 +68,7 @@ const call = async (e) => {
       width: { ideal: 1280 },
       height: { ideal: 720 },
       frameRate: { ideal: 30 },
-      facingMode: "user", // front camera (use "environment" for back camera)
+      facingMode: "user",
     },
   });
   localVideo.srcObject = localStream;
