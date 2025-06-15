@@ -3,6 +3,7 @@ const remoteVideo = document.querySelector("#remote-video");
 const callBtn = document.querySelector("#call-btn");
 const muteBtn = document.querySelector("#mute-btn");
 const joinBtn = document.querySelector("#join-btn");
+const pasteBtn = document.querySelector("#paste-btn");
 const socket = io({ cors: { origin: "*" } });
 
 document.querySelector("#random-id").value = Math.random()
@@ -14,11 +15,29 @@ document
   .addEventListener("click", async function () {
     const input = document.querySelector("#random-id");
     await navigator.clipboard.writeText(input.value);
-    document.querySelector("#copy-btn").textContent = "Copied!";
+    document.querySelector(
+      "#copy-btn"
+    ).innerHTML = `<span class="material-symbols-outlined">done</span>`;
     setTimeout(() => {
-      document.querySelector("#copy-btn").textContent = "Copy";
+      document.querySelector(
+        "#copy-btn"
+      ).innerHTML = `<span class="material-symbols-outlined">content_copy</span>`;
     }, 2000);
   });
+
+pasteBtn.addEventListener("click", async function () {
+  const input = document.querySelector("#room-id");
+  const text = await navigator.clipboard.readText();
+  input.value = text;
+  document.querySelector(
+    "#paste-btn"
+  ).innerHTML = `<span class="material-symbols-outlined">done</span>`;
+  setTimeout(() => {
+    document.querySelector(
+      "#paste-btn"
+    ).innerHTML = `<span class="material-symbols-outlined"> content_paste </span>`;
+  }, 2000);
+});
 
 let localStream;
 let peerConnection;
@@ -26,7 +45,9 @@ let roomId;
 
 muteBtn.addEventListener("click", () => {
   remoteVideo.muted = !remoteVideo.muted;
-  muteBtn.textContent = remoteVideo.muted ? "Unmute" : "Mute";
+  muteBtn.innerHTML = remoteVideo.muted
+    ? `<span class="material-symbols-outlined">volume_off</span>`
+    : `<span class="material-symbols-outlined">volume_up</span>`;
 });
 
 joinBtn.addEventListener("click", () => {
@@ -39,10 +60,15 @@ joinBtn.addEventListener("click", () => {
 
 const call = async (e) => {
   localStream = await navigator.mediaDevices.getUserMedia({
-    video: true,
     audio: {
-      echoCancellation: true,
+      echoCancellation: true, // makes voice clearer
       noiseSuppression: true,
+    },
+    video: {
+      width: { ideal: 1280 },
+      height: { ideal: 720 },
+      frameRate: { ideal: 30 },
+      facingMode: "user", // front camera (use "environment" for back camera)
     },
   });
   localVideo.srcObject = localStream;

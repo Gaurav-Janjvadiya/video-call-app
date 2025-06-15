@@ -3,6 +3,7 @@
 }
 
 body {
+  transition: all 0.5s ease;
   margin: 0;
   padding: 1rem;
   background-color: #303030;
@@ -21,7 +22,7 @@ button {
   border-radius: 20px;
   background-color: #2b2b2b;
   color: gray;
-  padding: 20px 40px;
+  padding: 10px 20px;
   font-size: xx-large;
   font-weight: bolder;
   cursor: pointer;
@@ -36,7 +37,6 @@ input {
   color: gray;
   padding: 10px 20px;
   font-weight: bolder;
-  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 

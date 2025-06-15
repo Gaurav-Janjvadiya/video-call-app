@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
   <body>
@@ -12,12 +16,21 @@
       <video autoplay playsinline id="remote-video"></video>
     </div>
     <div class="videos">
-      <button id="call-btn" disabled>Call</button>
-      <button id="mute-btn" disabled>Mute</button>
+      <button id="call-btn" disabled>
+        <span class="material-symbols-outlined"> call </span>
+      </button>
+      <button id="mute-btn" disabled>
+        <span class="material-symbols-outlined"> volume_up </span>
+      </button>
       <button id="join-btn">Join Room</button>
       <input type="text" id="room-id" placeholder="Enter Room ID" />
+      <button id="paste-btn">
+        <span class="material-symbols-outlined"> content_paste </span>
+      </button>
       <input type="text" id="random-id" disabled placeholder="Enter Room ID" />
-      <button id="copy-btn">Copy</button>
+      <button id="copy-btn">
+        <span class="material-symbols-outlined"> content_copy </span>
+      </button>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./scrips.js"></script>
