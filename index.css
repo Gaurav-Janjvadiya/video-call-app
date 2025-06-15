@@ -9,11 +9,10 @@ body {
   background-color: #303030;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
   font-size: medium;
   font-weight: 900;
 }
@@ -53,21 +52,22 @@ button:hover {
   gap: 10px;
   width: 100%;
   max-width: 1200px;
+  /* border: 1px solid white; */
 }
 
 video {
   border-radius: 20px;
-  margin: 10px;
   width: 100%;
   max-width: 500px;
-  height: auto;
+  height: 500px;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  /* border: 1px solid #ccc; */
 }
 
 @media (max-width: 768px) {
   body {
-    padding: 20px;
+    padding: 10px;
   }
 
   button {
@@ -80,12 +80,22 @@ video {
 }
 
 @media (max-width: 480px) {
+  body {
+    padding: 5px;
+  }
+
   button {
-    padding: 10px 20px;
+    padding: 10px px;
+    margin: 3px;
+  }
+
+  .videos{
+      margin-bottom: 10px;
   }
 
   video {
-    aspect-ratio: 1 / 1;
+    height: 250px;
     max-width: 100%;
+    gap: 5px;
   }
 }
