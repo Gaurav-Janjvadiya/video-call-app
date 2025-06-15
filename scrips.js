@@ -9,6 +9,17 @@ document.querySelector("#random-id").value = Math.random()
   .toString(36)
   .substring(2, 15);
 
+document
+  .querySelector("#copy-btn")
+  .addEventListener("click", async function () {
+    const input = document.querySelector("#random-id");
+    await navigator.clipboard.writeText(input.value);
+    document.querySelector("#copy-btn").textContent = "Copied!";
+    setTimeout(() => {
+      document.querySelector("#copy-btn").textContent = "Copy";
+    }, 2000);
+  });
+
 let localStream;
 let peerConnection;
 let roomId;
