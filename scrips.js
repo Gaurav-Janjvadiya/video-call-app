@@ -56,6 +56,12 @@ joinBtn.addEventListener("click", () => {
   console.log(`Joined room: ${roomId}`);
   callBtn.disabled = false;
   muteBtn.disabled = false;
+  document.querySelectorAll("input").forEach((input) => {
+    input.style.display = "none";
+  });
+  pasteBtn.style.display = "none";
+  document.querySelector("#copy-btn").style.display = "none";
+  joinBtn.style.display = "none";
 });
 
 const call = async (e) => {
