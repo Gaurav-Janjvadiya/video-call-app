@@ -1,13 +1,19 @@
 const localVideo = document.querySelector("#local-video");
 const remoteVideo = document.querySelector("#remote-video");
 const callBtn = document.querySelector("button");
-const socket = io();
+const socket = io({ cors: { origin: "*" } });
 
 let localStream;
 let peerConnection;
 
 const call = async (e) => {
-  localStream = await navigator.mediaDevices.getUserMedia({ video: true });
+  localStream = await navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: {
+      echoCancellation: true,
+      noiseSuppression: true,
+    },
+  });
   localVideo.srcObject = localStream;
   connect();
 };
@@ -26,7 +32,6 @@ const connect = async () => {
   socket.emit("offer", offer);
 
   socket.on("offer", async (offer) => {
-    // console.log(offer);
     if (offer) {
       peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
     }
@@ -36,7 +41,6 @@ const connect = async () => {
   });
 
   socket.on("answer", async (answer) => {
-    // console.log("Answer done!");
     const remoteDesc = new RTCSessionDescription(answer);
     await peerConnection.setRemoteDescription(remoteDesc);
   });
