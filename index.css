@@ -1,12 +1,32 @@
+:root {
+  --bg-color: #f8f3d9;
+  --btn-bg: #ebe5c2;
+  --btn-hover-bg: #b3aa7a;
+  --text-color: #504b38;
+  --border-color: rgba(223, 0, 0, 0);
+  --border-radius: 20px;
+  --video-height-desktop: 500px;
+  --video-height-mobile: 250px;
+  --gap: 10px;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
+  background-image: radial-gradient(
+    circle,
+    #b9b28a,
+    #9e9774,
+    #837c5f,
+    #69634b,
+    #504b38
+  );
   transition: all 0.5s ease;
   margin: 0;
   padding: 1rem;
-  background-color: #303030;
+  background-color: var(--bg-color);
   display: flex;
   justify-content: center;
   align-items: start;
@@ -19,10 +39,10 @@ body {
 
 button {
   outline: none;
-  border: rgb(94, 94, 94) 3px solid;
-  border-radius: 20px;
-  background-color: #2b2b2b;
-  color: gray;
+  border: var(--border-color) 3px solid;
+  border-radius: var(--border-radius);
+  background-color: var(--btn-bg);
+  color: var(--text-color);
   padding: 20px;
   font-weight: bolder;
   cursor: pointer;
@@ -31,17 +51,17 @@ button {
 
 input {
   outline: none;
-  border: rgb(94, 94, 94) 3px solid;
-  border-radius: 20px;
-  background-color: #2b2b2b;
-  color: gray;
+  border: var(--border-color) 3px solid;
+  border-radius: var(--border-radius);
+  background-color: var(--btn-bg);
+  color: var(--text-color);
   padding: 20px;
   font-weight: bolder;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #242424;
+  background-color: var(--btn-hover-bg);
 }
 
 .videos {
@@ -49,20 +69,18 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: var(--gap);
   width: 100%;
   max-width: 1200px;
-  /* border: 1px solid white; */
 }
 
 video {
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   width: 100%;
   max-width: 500px;
-  height: 500px;
+  height: var(--video-height-desktop);
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  /* border: 1px solid #ccc; */
 }
 
 @media (max-width: 768px) {
@@ -85,16 +103,16 @@ video {
   }
 
   button {
-    padding: 10px px;
+    padding: 10px;
     margin: 3px;
   }
 
-  .videos{
-      margin-bottom: 10px;
+  .videos {
+    margin-bottom: 10px;
   }
 
   video {
-    height: 250px;
+    height: var(--video-height-mobile);
     max-width: 100%;
     gap: 5px;
   }
